@@ -1,0 +1,59 @@
+[versions]
+plugin-android = "7.2.0"
+plugin-kotlin = "1.5.31"
+plugin-hilt = "2.38.1"
+plugin-google-service = "4.3.10"
+
+# Compose
+androidx-core = "1.8.0"
+androidx-compose-material = "1.0.0-alpha13"
+androidx-compose-activity = "1.4.0"
+androidx-compose-ui = "1.2.0-rc01"
+androidx-navigation = "2.4.0-alpha07"
+# Kotlin Coroutine
+kotlinx-coroutines = "1.6.3"
+# Firebase
+firebase = "30.1.0"
+# Google Service
+google-service-location = "17.1.0"
+
+[libraries]
+plugin-android = { module = "com.android.tools.build:gradle", version.ref = "plugin-android" }
+plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "plugin-kotlin" }
+plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "plugin-hilt" }
+plugin-google-service = { module = "com.google.gms:google-services", version.ref = "plugin-google-service" }
+
+# Google Service
+google-service-location = { module = "com.google.android.gms:play-services-location", version.ref = "google-service-location" }
+
+# Compose
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-compose-material = { module = "androidx.compose.material3:material3", version.ref = "androidx-compose-material" }
+androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-compose-activity" }
+androidx-compose-ui-ui = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose-ui" }
+androidx-compose-ui-toolingpreview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-compose-ui" }
+# Android
+androidx-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+# Kotlin Coroutine
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+# Google Firebase
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+# Log
+timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+
+# DI
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "plugin-hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "plugin-hilt" }
+
+# HTTP
+http-square-okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version = "4.9.1" }
+http-square-retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
+
+[bundles]
+plugins = ["plugin-android", "plugin-kotlin", "plugin-hilt", "plugin-google-service"]
+kotlin = ["kotlinx-coroutines-android"]
+compose = ["androidx-compose-material", "androidx-compose-activity", "androidx-compose-ui-ui", "androidx-compose-ui-toolingpreview", "androidx-navigation"]
+google = ["google-service-location"]
+firebase = ["firebase-analytics", "firebase-auth"]

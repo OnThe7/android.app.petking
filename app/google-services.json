@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "498668673292",
+    "project_id": "petking-202206",
+    "storage_bucket": "petking-202206.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498668673292:android:4acbd39e2d5dffcef4d129",
+        "android_client_info": {
+          "package_name": "io.lowapple.app.android.petking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498668673292-dradlk4oj463cspr1eeaens3fm0h89d0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfKnTns7l7pOkbY72TZn8tpEGzbrALUQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498668673292-dradlk4oj463cspr1eeaens3fm0h89d0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

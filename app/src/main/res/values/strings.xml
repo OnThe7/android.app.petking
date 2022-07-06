@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">petking</string>
+    <string name="signin_github_redirect">app.petking-authorization-redirect</string>
+</resources>
