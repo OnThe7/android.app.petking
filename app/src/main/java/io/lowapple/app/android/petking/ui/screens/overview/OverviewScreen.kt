@@ -2,6 +2,7 @@ package io.lowapple.app.android.petking.ui.screens.overview
 
 import android.content.ComponentName
 import android.content.ServiceConnection
+import android.location.Location
 import android.os.IBinder
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -15,6 +16,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import io.lowapple.app.android.petking.PetKingTrackerService
+import io.lowapple.app.android.petking.domain.models.PetKingLocation
 import timber.log.Timber
 
 interface OverviewScreenListener {
@@ -24,6 +26,7 @@ interface OverviewScreenListener {
 
 @Composable
 fun OverviewBody(
+    trackingPoints: List<PetKingLocation> = emptyList(),
     listener: OverviewScreenListener? = null
 ) {
     Column(
@@ -32,10 +35,12 @@ fun OverviewBody(
             .verticalScroll(rememberScrollState())
             .semantics { contentDescription = "Overview Screen" }
     ) {
+        Text(text = "저장된 위치개수: ${trackingPoints.size}")
+
         Button(onClick = {
             listener?.onConnectingTracker()
         }) {
-            Text("ASDSADALKJSAD")
+            Text("트래킹 시작")
         }
     }
 }

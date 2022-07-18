@@ -2,6 +2,8 @@ plugins {
     id("com.google.gms.google-services")
     id("com.android.library")
     id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+    kotlin("plugin.serialization")
     kotlin("android")
     kotlin("kapt")
 }
@@ -36,11 +38,17 @@ android {
 }
 
 dependencies {
+    // Libs
+    implementation(libs.timber)
     implementation(libs.androidx.core)
     implementation(libs.bundles.kotlin)
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.bundles.firebase)
+    // Room
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+
+    // implementation(platform(libs.firebase.bom))
+    // implementation(libs.bundles.firebase)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

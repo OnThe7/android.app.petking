@@ -23,3 +23,5 @@ include(":shared")
 // Include the host app project.
 
 //apply { from("./gradle/flutter_settings.gradle") }
+//include(":android-sdk-oauth:buildSrc")
+//include(":android-sdk-oauth:android-sdk-oauth-google")

@@ -35,6 +35,7 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        dataBinding = true
     }
 //    composeOptions {
 //        kotlinCompilerExtensionVersion = "1.1.0-beta01"
@@ -47,6 +48,10 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf(
+        "include" to listOf("*.jar"), "dir" to "libs"
+    )))
+    // implementation(fileTree(include:["*.aar"], dir: "libs"))
     // Platform
     implementation(platform(libs.firebase.bom))
     // Bundles
@@ -54,6 +59,10 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(libs.bundles.firebase)
     implementation(libs.bundles.google)
+    implementation(libs.google.service.playservice)
+    // Kakao
+    implementation(libs.bundles.kakao)
+
     // Libs
     implementation(libs.timber)
 

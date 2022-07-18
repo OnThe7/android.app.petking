@@ -18,19 +18,27 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
+import io.lowapple.app.android.petking.domain.models.PetKingLocation
+import io.lowapple.app.android.petking.domain.repositories.PetKingRepository
 import timber.log.Timber
+import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-
+@AndroidEntryPoint
 class PetKingTrackerService : Service(), SensorEventListener {
+    @Inject
+    lateinit var repository: PetKingRepository
+
     companion object {
         private val TAG = PetKingTrackerService::class.java.simpleName
         private const val SMOOTHING_WINDOW_SIZE = 20.0f
-        private const val SMALLEST_DISPLACEMENT_100_METERS = 100F
-        private const val INTERVAL_TIME = 60
-        private const val FASTEST_INTERVAL_TIME = 30
+        private const val SMALLEST_DISPLACEMENT_100_METERS = 10F
+        private const val INTERVAL_TIME = 10
+        private const val FASTEST_INTERVAL_TIME = 5
         private const val NOTIFICATION_CHANNEL_ID = "channel_01"
         private const val NOTIFICATION_ID = 1011
         private const val EXTRA_STARTED_FROM_NOTIFICATION = "started_from_notification"
@@ -42,6 +50,8 @@ class PetKingTrackerService : Service(), SensorEventListener {
     }
 
     private val binder = PetKingTrackerBinder()
+
+    private var currentTrackingId: String? = null
 
     // Notification Manager
     private val nm by lazy {
@@ -91,18 +101,16 @@ class PetKingTrackerService : Service(), SensorEventListener {
     }
 
     // Callback for changes in location.
-    private val locationCallback by lazy {
-        object : LocationCallback() {
-            override fun onLocationResult(res: LocationResult) {
-                super.onLocationResult(res)
-                locationUpdateFromNew(res.lastLocation)
-            }
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(res: LocationResult) {
+            super.onLocationResult(res)
+            locationUpdateFromNew(res.lastLocation)
         }
     }
 
     override fun onCreate() {
         super.onCreate()
-        locationUpdateFromLast()
+        // locationUpdateFromLast()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.app_name)
             val chan = NotificationChannel(
@@ -119,27 +127,35 @@ class PetKingTrackerService : Service(), SensorEventListener {
 
     override fun onBind(intent: Intent): IBinder {
         Timber.tag(TAG).i("in onBind()")
-        stopForeground(true)
+//        stopForeground(true)
         return binder
     }
 
     override fun onRebind(intent: Intent?) {
         Timber.tag(TAG).i("in onReBind()")
-        stopForeground(true)
+//        stopForeground(true)
         super.onRebind(intent)
     }
 
     override fun onUnbind(intent: Intent?): Boolean {
         Timber.tag(TAG).i("Last client unbound from service")
         Timber.tag(TAG).i("Starting foreground service")
-        startForeground(NOTIFICATION_ID, getNotification())
+//        startForeground(NOTIFICATION_ID, getNotification())
         return true
+    }
+
+    @Throws(Exception::class)
+    fun currentTrackingId(): String {
+        return this.currentTrackingId ?: throw Exception("not called requestUpdates()")
     }
 
     fun requestUpdates() {
         Timber.tag(TAG).i("Requesting location updates")
         startService(Intent(applicationContext, PetKingTrackerService::class.java))
-//        startForeground(NOTIFICATION_ID, getNotification())
+        startForeground(NOTIFICATION_ID, getNotification())
+        currentTrackingId = UUID.randomUUID().toString()
+        locationUpdateFromLast()
+
         try {
             locationClient.requestLocationUpdates(
                 locationRequest, locationCallback, Looper.myLooper()
@@ -165,6 +181,15 @@ class PetKingTrackerService : Service(), SensorEventListener {
             locationClient.lastLocation.addOnCompleteListener { task ->
                 if (task.isSuccessful && task.result != null) {
                     location = task.result!!
+                    Timber.tag(TAG).i("Last location: $location")
+
+                    if (currentTrackingId == null) {
+                        throw Exception("not called requestUpdates()")
+                    }
+                    repository.addLocation(
+                        currentTrackingId!!,
+                        PetKingLocation(location.latitude, location.longitude)
+                    )
                 } else {
                     Timber.tag(TAG).w("Failed to get location")
                 }
@@ -180,6 +205,13 @@ class PetKingTrackerService : Service(), SensorEventListener {
     private fun locationUpdateFromNew(location: Location) {
         Timber.tag(TAG).i("New location: $location")
         this.location = location
+        if (currentTrackingId == null) {
+            throw Exception("not called requestUpdates()")
+        }
+        this.repository.addLocation(
+            currentTrackingId!!,
+            PetKingLocation(location.latitude, location.longitude)
+        )
 
         nm.notify(NOTIFICATION_ID, getNotification())
     }

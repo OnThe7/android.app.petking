@@ -15,12 +15,31 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.petking"
         tools:targetApi="32">
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="22e4701e912ad1220534187a04a2d280" />
+
         <activity
             android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.petking">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ui.screens.signin.SignInActivity"
+            android:exported="true"
+            android:theme="@style/Theme.petking"></activity>
+        <activity
+            android:name=".ui.screens.mapview.MapViewActivity"
             android:exported="true"
             android:theme="@style/Theme.petking">
             <intent-filter>
@@ -29,6 +48,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao22e4701e912ad1220534187a04a2d280" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".PetKingTrackerService"
             android:enabled="true"

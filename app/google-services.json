@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "498668673292",
-    "project_id": "petking-202206",
-    "storage_bucket": "petking-202206.appspot.com"
+    "project_number": "966570516233",
+    "project_id": "pups-road",
+    "storage_bucket": "pups-road.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:498668673292:android:4acbd39e2d5dffcef4d129",
+        "mobilesdk_app_id": "1:966570516233:android:380f69059e7f57251bfdd8",
         "android_client_info": {
           "package_name": "io.lowapple.app.android.petking"
         }
       },
       "oauth_client": [
         {
-          "client_id": "498668673292-dradlk4oj463cspr1eeaens3fm0h89d0.apps.googleusercontent.com",
+          "client_id": "966570516233-k97i831qlr90gp12n3p73s05op07jrcp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBfKnTns7l7pOkbY72TZn8tpEGzbrALUQY"
+          "current_key": "AIzaSyDbCvQdZ6MSTK1r4yB14wJiIDsxa0_G61Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "498668673292-dradlk4oj463cspr1eeaens3fm0h89d0.apps.googleusercontent.com",
+              "client_id": "966570516233-k97i831qlr90gp12n3p73s05op07jrcp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

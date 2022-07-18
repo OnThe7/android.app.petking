@@ -1,2 +1,0 @@
-setBinding(new Binding([gradle: this]))
-evaluate(new File(settingsDir, "../presentation_signin/.android/include_flutter.groovy"))

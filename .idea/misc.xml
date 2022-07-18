@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/java/io/lowapple/app/android/gitmage/MainActivity.kt" value="0.9105691056910569" />
+        <entry key="app/src/main/java/io/lowapple/app/android/petking/MainActivity.kt" value="0.5650406504065041" />
+        <entry key="app/src/main/java/io/lowapple/app/android/petking/ui/components/button/OAuthButton.kt" value="0.2212962962962963" />
+        <entry key="app/src/main/java/io/lowapple/app/android/petking/ui/components/petking/item/PetKingButton.kt" value="0.5650406504065041" />
+        <entry key="app/src/main/java/io/lowapple/app/android/petking/ui/screens/signin/SignIn.kt" value="0.33425925925925926" />
+        <entry key="app/src/main/res/drawable/ic_google.xml" value="0.1805" />
+        <entry key="app/src/main/res/drawable/ic_kakao.xml" value="0.1755" />
+        <entry key="app/src/main/res/layout/activity_mapview.xml" value="0.18614130434782608" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="azul-11" project-jdk-type="JavaSDK" />
+</project>
